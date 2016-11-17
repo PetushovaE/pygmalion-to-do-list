@@ -1,4 +1,4 @@
-<h2>Your Task <%= @task.name %>, <%= @task.location %></h2>
+<h2>Your Task <%= @task.name %>, <%= @task.subject %></h2>
 <% unless locals.empty? %>
 <%= message %>
 <% end %>
