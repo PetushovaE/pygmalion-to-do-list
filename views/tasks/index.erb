@@ -1,0 +1,9 @@
+<h2>Your Tasks</h2>
+<button type="button" class="btn btn-default"><a href="/tasks/new">Create a New Task</a></button>
+<ul>
+<% @tasks.each do |trip| %>
+<% if task.user_id == session[:user_id] %>
+<li><a href="/tasks/<%= task.id %>><%= task.name %>, <%= task.subject %></a></li>
+<% end %>
+<% end %>
+</ul>
