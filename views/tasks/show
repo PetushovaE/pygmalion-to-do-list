@@ -1,0 +1,17 @@
+<h2>Task Name: <%= @task.name %></h2>
+<h3>Location: <%= @task.subject %></h3>
+<% unless locals.empty? %>
+<%= message %>
+<% end %>
+<br>
+<button type="button" class="btn btn-default" name="create_list"><a href="/tasks/<%= @task.id %>/lists/new">Create a New List</a></button>
+<ul>
+<% @task.lists.each do |list| %>
+<li><a href="/tasks/<%= list.task_id %>/lists/<%= list.id %>><%= list.title %></a></li>
+<% end %>
+</ul>
+<form action="/tasks/<%= @task.id %>/delete" method="post">
+<input type="hidden" id="hidden" name="_method" value="delete">
+<button type="button" class="btn btn-default" name="edit_task"><a href="/tasks/<%= @task.id %>/edit">Edit Task</a></button>
+<input type="submit" class="btn btn-default" value="Delete Task">
+</form>
