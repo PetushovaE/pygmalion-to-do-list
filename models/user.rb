@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-	has_many :lists
+	has_many :tasks
+	has_many :lists, :through => :tasks
 
 	has_secure_password
 
