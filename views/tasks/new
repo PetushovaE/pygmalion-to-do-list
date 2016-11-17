@@ -1,0 +1,13 @@
+<h2>Your Task <%= @task.name %>, <%= @task.location %></h2>
+<% unless locals.empty? %>
+<%= message %>
+<% end %>
+<br>
+<h3><strong>Create a List</strong></h3>
+<form action="/tasks/<%= @task.id %>/lists" method="post">
+<label for="title">Title: </label>
+<input type="text" name="title" placeholder="title">
+<br>
+<label for="content">Content: </label>
+<br>
+<textarea name="content"></textarea>
