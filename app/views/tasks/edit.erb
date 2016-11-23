@@ -1,16 +1,17 @@
-<h2>Edit Your Task</h2>
+<h4>Edit Your Task: <%= @task.name.capitalize %></h4>
+<h4><%= @task.content %></h4>
 <% unless locals.empty? %>
 <%= message %>
 <% end %>
-<br>
+
 <form action="/tasks/<%= @task.id %>" method="post">
 <input type="hidden" id="hidden" name="_method" value="patch">
 <label for="name">Task Name: </label>
 <input type="text" name="name" value="<% @task.name %>" placeholder="name">
 <br>
-<label for="location">Task Subject: </label>
-<input type="text" name="location" value="<% @task.location %>" placeholder="subject">
+<label for="content">Task Content: </label>
 <br>
-<input type="submit" class="btn btn-default" value="Submit">
-<button type="button" class="btn btn-default" name="delete"><a href="/tasks/<%= @task.id %>">Delete</a></button>
+<textarea name="content"></textarea>
+<br>
+<input class="button hidden" type="submit" value="Update" name="commit" />
 </form>

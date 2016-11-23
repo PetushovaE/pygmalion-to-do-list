@@ -1,27 +1,24 @@
+
+require 'pry'
 class UsersController < ApplicationController
 
 		get '/signup' do
-			if is_logged_in?
-
-				redirect '/trips'
-			else
+			if !session[:user_id]
 				erb :'/users/signup'
+			else
+				redirect to '/tasks'
 			end
 		end
 		
-		get '/users/:id' do
-			@user = User.find_by_id(params[:id])
-			@tasks = @user.tasks
-			erb :'/users/show'
-		end
-		
 		post '/signup' do
+			if params[:username] == "" || params[:email] == "" || params[:password] == ""
+      			erb :'/users/signup', locals: {message: "Please sign up before you sign in"}
+      		else
 			@user = User.new(username: params[:username], email: params[:email], password: params[:password])
-			if @user.save
+			@user.save
+			# binding.pry
 				session[:user_id] = @user.id
 				redirect '/tasks'
-			else
-				erb :'/users/signup', locals: {message: "There seems to be an error. Please try again."}
 			end
 		end
 
@@ -39,13 +36,15 @@ class UsersController < ApplicationController
 				session[:user_id] = user.id
 				redirect '/tasks'
 			else
-				erb :'/users/login', locals: {message: "There seems to be an error. Please try again."}
+				erb :'/users/signup', locals: {message: "There seems to be an error. Please try again."}
 			end
 		end
 		
 		get '/logout' do
-			session.clear
-			erb :'/index'
-			end
-		end
+    		if session[:user_id] != nil
+      			session.destroy
+      			redirect to '/'
+    		end
+  		end
 end
+

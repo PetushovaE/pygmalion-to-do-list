@@ -1,9 +1,20 @@
-<h2>Your Tasks</h2>
-<button type="button" class="btn btn-default"><a href="/tasks/new">Create a New Task</a></button>
-<ul>
-<% @tasks.each do |trip| %>
-<% if task.user_id == session[:user_id] %>
-<li><a href="/tasks/<%= task.id %>><%= task.name %>, <%= task.subject %></a></li>
-<% end %>
-<% end %>
-</ul>
+<h3><%= current_user.username.capitalize %></h3>
+</h4>Here are your tasks:</h4>
+	<ul><% @tasks.each do |task| %>
+		<% if task.user_id == session[:user_id] %>
+			<br>
+				<li><a href="/tasks/<%= task.id %>"</a><%= task.name.capitalize %>
+				</li>
+				<form action="/tasks/<%= task.id %>/delete" method="post">
+						<input type="hidden" id="hidden" name="_method" value="delete">
+
+						<button type="button" class="btn btn-default" name="edit_content"><a href="/tasks/<%= task.id %>/edit">Edit</a></button>
+
+
+						<input type="submit" class="btn btn-default" value="Delete">
+					</form>
+					</br>
+					<% end %>
+				<% end %>
+	</ul>
+
