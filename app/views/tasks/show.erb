@@ -1,8 +1,9 @@
-<h4>Task Name: <%= @task.name.capitalize %></h4>
-<h4><%= @task.content %></h4>
+<h4>Task: <%= @task.name.capitalize %></h4>
+<br>
+<h4> <%= @task.content.capitalize %></h4>
 <form method="post" action="/tasks/<%=@task.id%>/delete">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" class="btn btn-default" value="Delete">
 
 <button type="button" class="btn btn-default" name="edit_content"><a href="/tasks/<%= @task.id %>/edit">Edit</a></button>
 </form>
