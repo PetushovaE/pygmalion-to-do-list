@@ -14,8 +14,8 @@ class UsersController < ApplicationController
 			if params[:username] == "" || params[:email] == "" || params[:password] == ""
       			erb :'/users/signup', locals: {message: "Please sign up before you sign in"}
       		else
-			@user = User.new(username: params[:username], email: params[:email], password: params[:password])
-			@user.save
+				@user = User.new(username: params[:username], email: params[:email], password: params[:password])
+				@user.save
 			# binding.pry
 				session[:user_id] = @user.id
 				redirect '/tasks'
@@ -43,6 +43,7 @@ class UsersController < ApplicationController
 		get '/logout' do
     		if session[:user_id] != nil
       			session.destroy
+      			binding.pry
       			redirect to '/'
     		end
   		end

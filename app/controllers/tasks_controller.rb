@@ -2,7 +2,7 @@ class TasksController < ApplicationController
 		
 	get '/tasks' do
 		if is_logged_in?
-			@tasks = Task.all
+			@tasks = current_user.tasks
 			erb :'/tasks/index'
 		else
 			erb :'/users/login', locals: {message: "Access denied. Please log-in to view."}
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
 		end
 	end
 	
-	post '/tasks' do
+	post '/task' do
 		if params[:name] == "" || params[:content] == ""
 			erb :'/tasks/new', locals: {message: "There seems to be an error. Please try again."}
 		else
@@ -28,21 +28,23 @@ class TasksController < ApplicationController
 	end
 
 	get '/tasks/:id' do
-		if is_logged_in?
-			@task = Task.find(params[:id])
+		@task = Task.find(params[:id])
+		if is_logged_in? 
+			# && @task.user == current_user
 			erb :'/tasks/show'
+				
 		else
 			erb :'/users/login', locals: {message: "Access denied. Please log-in to view."}
 		end
 	end
 
 	get '/tasks/:id/edit' do
-		if is_logged_in?
-			@task = Task.find_by_id(params[:id])
+		@task = Task.find_by_id(params[:id])
+		if is_logged_in? 
 		if @task.user_id == session[:user_id]
 			erb :'/tasks/edit'
 		else
-			erb :'/tasks', locals: {message: "Sorry, you do not have permission to edit this task."}
+			erb :'/tasks/show', locals: {message: "Sorry, you do not have permission to edit or delete this task."}
 			end
 		else
 			erb :'/users/login', locals: {message: "Access denied. Please log-in to view."}
@@ -62,7 +64,9 @@ class TasksController < ApplicationController
 	
 	delete '/tasks/:id/delete' do
 		@task = Task.find_by_id(params[:id])
+		if is_logged_in? && @task.user_id == current_user.id
 		@task.delete
-	redirect '/tasks'
+        end
+     redirect '/tasks'
 	end
 end

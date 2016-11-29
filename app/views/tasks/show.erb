@@ -1,9 +1,12 @@
+<br>
 <h4>Task: <%= @task.name.capitalize %></h4>
 <br>
 <h4> <%= @task.content.capitalize %></h4>
+<% if @task.user_id == session[:user_id] %>
 <form method="post" action="/tasks/<%=@task.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" class="btn btn-default" value="Delete">
 
 <button type="button" class="btn btn-default" name="edit_content"><a href="/tasks/<%= @task.id %>/edit">Edit</a></button>
 </form>
+<% end %>
