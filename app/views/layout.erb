@@ -17,8 +17,12 @@
 <nav>
 <ul class="nav masthead-nav">
 <% if is_logged_in? %>
+
 <button type="button" class="btn btn-default"><a href="/tasks">Tasks</a></button>
+
+
 <button type="button" class="btn btn-default"><a href="/tasks/new">Create Task</a></button>
+
 <button type="button" class="btn btn-default"><a href="/logout">Log Out</a></button>
 <% else %>
 <li class="active"><a href="/login">Log In</a></li>

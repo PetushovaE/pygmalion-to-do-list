@@ -1,17 +1,17 @@
 <h3>Create a New Task</h3>
+
 <% unless locals.empty? %>
 <%= message %>
 <% end %>
-<form action="/task" method="post">
-<label for="name">Task Name: </label>
-<input type="text" name="name" placeholder="name">
-<br>
-<label for="content">Task Content: </label>
-<br>
-<textarea name="content"></textarea>
 
-<button type="submit" class="btn btn-primary" name="create">Create</button>
+	<form action="/task" method="post">
+		<label for="name">Title: </label>
 
+		<input type="text" name="name" placeholder="name">
+		<br>
+		<label for="content">Desctiption: </label>
+		<br>
+		<textarea name="content"></textarea>
 
-
-</form>
+		<button type="submit" class="btn btn-primary btn-sm" name="create">Create</button>
+	</form>

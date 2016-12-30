@@ -1,4 +1,3 @@
-
 require 'pry'
 class UsersController < ApplicationController
 
@@ -43,7 +42,7 @@ class UsersController < ApplicationController
 		get '/logout' do
     		if session[:user_id] != nil
       			session.destroy
-      			binding.pry
+      			# binding.pry
       			redirect to '/'
     		end
   		end

@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
-	has_many :tasks
-
+has_many :tasks
 	has_secure_password
 
 	# def password=(pw)
@@ -11,3 +10,4 @@ class User < ActiveRecord::Base
 
 	validates_presence_of :username, :email, :password 
 end
+

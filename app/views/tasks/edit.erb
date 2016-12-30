@@ -1,17 +1,15 @@
-<h4>Edit Your Task:
 <br>
-<% unless locals.empty? %>
-<%= message %>
-<% end %>
+<h4>Edit your task:
+<br><br>
 
-<form action="/tasks/<%= @task.id %>" method="post">
-<input type="hidden" id="hidden" name="_method" value="patch">
-<label for="name">Name: </label>
-<input type="text" name="name" value="<%= @task.name %>" placeholder="name">
-<br>
-<label for="content">Content: </label>
-<br>
-<textarea name="content" ><%= @task.content %></textarea>
-<br>
-<input class="btn btn-primary" type="submit" value="Update" name="commit" />
-</form>
+	<form action="/tasks/<%= @task.id %>" method="post">
+		<input type="hidden" id="hidden" name="_method" value="patch">
+		<label for="name">Task title: </label>
+		<input type="text" name="name" value="<%= @task.name %>" placeholder="name">
+		<br><br>
+		<label for="content">Description: </label>
+		<br>
+		<textarea name="content" ><%= @task.content %></textarea>
+		<br>
+		<input class="btn btn-primary btn-sm" type="submit" value="Update" name="commit" />
+	</form>

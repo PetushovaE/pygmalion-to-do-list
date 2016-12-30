@@ -31,8 +31,7 @@ class TasksController < ApplicationController
 		@task = Task.find(params[:id])
 		if is_logged_in? 
 			# && @task.user == current_user
-			erb :'/tasks/show'
-				
+			erb :'/tasks/show'		
 		else
 			erb :'/users/login', locals: {message: "Access denied. Please log-in to view."}
 		end
@@ -51,6 +50,11 @@ class TasksController < ApplicationController
 		end
 	end
 
+	get '/tasks/:id/warning' do
+		@task = Task.find_by_id(params[:id])
+		erb :'tasks/warning'
+	end
+
 	patch '/tasks/:id' do
 		if params[:name] == "" || params[:content] == ""
 			@task = Task.find_by_id(params[:id])
@@ -61,12 +65,15 @@ class TasksController < ApplicationController
 			redirect "/tasks/#{@task.id}"
 		end
 	end
-	
+
 	delete '/tasks/:id/delete' do
-		@task = Task.find_by_id(params[:id])
-		if is_logged_in? && @task.user_id == current_user.id
-		@task.delete
-        end
-     redirect '/tasks'
-	end
+    	@task = Task.find_by_id(params[:id])
+    	if is_logged_in? && @task.user_id == current_user.id
+    		@task.delete
+    	end
+    		redirect '/tasks'
+  	end
 end
+
+
+
